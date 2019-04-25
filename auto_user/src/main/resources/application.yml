@@ -1,0 +1,22 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: auto_user
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.106.37.43:33306/auto_user?characterEncoding=UTF8
+    username: root
+    password: 123456
+  jpa:
+    show-sql: true
+    database: mysql
+
+logging:
+  level:
+    root: debug
+
+jwt:
+  config:
+    key: xingxing
+    ttl: 360000
