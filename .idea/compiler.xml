@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="auto_base" />
+        <module name="auto_commom" />
+        <module name="auto_user" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="auto_base" target="1.8" />
+      <module name="auto_commom" target="1.8" />
+      <module name="auto_test" target="1.8" />
+      <module name="auto_user" target="1.8" />
+      <module name="jjwt-api" target="1.5" />
+      <module name="jjwt-extensions" target="1.5" />
+      <module name="jjwt-impl" target="1.5" />
+      <module name="jjwt-jackson" target="1.5" />
+      <module name="jjwt-orgjson" target="1.5" />
+      <module name="jjwt-root" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
