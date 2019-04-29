@@ -17,7 +17,7 @@ public class Project implements Serializable{
     private String id;
 
     @NotNull(message = "项目名不能为空")
-    private String project_name;
+    private String projectName;
 
 
     private String version;
@@ -26,7 +26,7 @@ public class Project implements Serializable{
 
     @NotNull(message = "项目状态不能为空")
     private String status;
-    private String lastPpdateTime;
+    private String lastUpdateTime;
     private String createTime;
 
 

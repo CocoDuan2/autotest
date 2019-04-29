@@ -50,4 +50,15 @@ logging:
 jwt:
   config:
     key: xingxing
-    ttl: 90000
+    ttl: 90000000000
+
+##mybatis配置
+#mybatis:
+#  typeAliasesPackage: com.example.mybaitsxml.dao.entity
+#    mapperLocations: classpath:mapper/*.xml
+#    configuration:
+#      map-underscore-to-camel-case: true
+
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
