@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/project")
@@ -49,6 +52,11 @@ public class ProjectController {
                                      HttpServletRequest request) {
         try {
             Page<Project> projectPageList = projectService.getProjectPageList(project, pageNo, size);
+
+            Map resultMap = new HashMap<>();
+            resultMap.put("total",projectPageList.getTotal());
+            resultMap.put("data",projectPageList.getResult());
+
             return new Result(StatusCode.OK, "成功", new PageResult<Project>(projectPageList.getTotal(),
                     projectPageList.getResult()));
         } catch (Exception e) {

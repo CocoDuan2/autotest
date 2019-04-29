@@ -25,6 +25,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     @Autowired
     UserService userService;
 
+    @Autowired
+    JwtUtil jwtUtil;
+
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws Exception {
 
@@ -75,7 +78,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             if (user == null) {
                 throw new RuntimeException("用户不存在，请重新登录");
             }
-            Boolean verify = JwtUtil.isVerify(token, user);
+            Boolean verify = jwtUtil.isVerify(token, user);
             if (!verify) {
                 throw new RuntimeException("非法访问！");
             }

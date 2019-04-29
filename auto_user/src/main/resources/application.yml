@@ -48,4 +48,4 @@ logging:
 jwt:
   config:
     key: xingxing
-    ttl: 360000
+    ttl: 90000

@@ -1,19 +1,19 @@
 package com.xingxing.user.utils;
 
+import com.sun.media.jfxmedia.logging.Logger;
 import com.xingxing.user.User;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
+import javax.xml.bind.DatatypeConverter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 @ConfigurationProperties("jwt.config")
+@Slf4j
 public class JwtUtil {
 
 
@@ -59,7 +59,7 @@ public class JwtUtil {
         claims.put("password", user.getPassword());
 
         //生成签名的时候使用的秘钥secret,这个方法本地封装了的，一般可以从本地配置文件中读取，切记这个秘钥不能外露哦。它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个secret, 那就意味着客户端是可以自我签发jwt了。
-        String key = user.getPassword();
+      //  String key = user.getPassword();
 
         //生成签发人
         String subject = user.getUsername();
@@ -96,7 +96,7 @@ public class JwtUtil {
      */
     public  Claims parseJWT(String token, User user) {
         //签名秘钥，和生成的签名的秘钥一模一样
-        String key = user.getPassword();
+       // String key = user.getPassword();
 
         //得到DefaultJwtParser
         Claims claims = Jwts.parser()
@@ -110,27 +110,34 @@ public class JwtUtil {
 
     /**
      * 校验token
-     * 在这里可以使用官方的校验，我这里校验的是token中携带的密码于数据库一致的话就校验通过
+     * 在这里可以使用官方的校验，
      *
      * @param token
      * @param user
      * @return
      */
-    public static Boolean isVerify(String token, User user) {
+    public Boolean isVerify(String token, User user) {
         //签名秘钥，和生成的签名的秘钥一模一样
-        String key = user.getPassword();
+     //   String key = user.getPassword();
+        Claims claims = null;
 
-        //得到DefaultJwtParser
-        Claims claims = Jwts.parser()
-                //设置签名的秘钥
-                .setSigningKey(key)
-                //设置需要解析的jwt
-                .parseClaimsJws(token).getBody();
+        try {
+            //得到DefaultJwtParser
+            claims = Jwts.parser()
+                    //设置签名的秘钥
+                    .setSigningKey(key)
+                    //设置需要解析的jwt
+                    .parseClaimsJws(token).getBody();
+        } catch (Exception e) {
+            log.error("JWT验证出错，错误原因：{}"+e.getMessage());
+        }
 
         if (claims.get("password").equals(user.getPassword())) {
             return true;
         }
 
         return false;
+
+
     }
 }
