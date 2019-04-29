@@ -22,6 +22,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user")
 @Slf4j
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -43,7 +44,6 @@ public class UserController {
      */
     @LoginToken
     @ApiOperation(value = "用户登录请求")
-    @CrossOrigin("http://localhost:9528")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(@RequestBody User user, HttpServletRequest request) {
 

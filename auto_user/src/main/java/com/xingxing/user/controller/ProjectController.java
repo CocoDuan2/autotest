@@ -20,6 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/project")
 @Slf4j
+@CrossOrigin(origins = "*")
 public class ProjectController {
 
     @Autowired
@@ -45,7 +46,6 @@ public class ProjectController {
 
     }*/
 
-    @CrossOrigin("http://localhost:9528")
     @RequestMapping(value = "/getProjectPageList", method = RequestMethod.POST)
     public Result getProjectPageList(Project project, @RequestParam(name = "pageNo", required = false, defaultValue =
             "1") Integer pageNo, @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
