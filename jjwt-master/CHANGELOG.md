@@ -200,7 +200,7 @@ try {
 
 **This feature is NOT JWT specification compliant**, *but it can be very useful when you parse your own tokens*.
 
-If your JWT body is large and you have size restrictions (for example, if embedding a JWT in a URL and the URL must be under a certain length for legacy browsers or mail user agents), you may now compress the JWT body using a `CompressionCodec`:
+If your JWT body is large and you have size restrictions (for example, if embedding a JWT in a URL and the URL must be under a certain length for legacy browsers or mail com.xingxing.user agents), you may now compress the JWT body using a `CompressionCodec`:
 
 ```java
 Jwts.builder().claim("foo", "someReallyLongDataString...")

@@ -86,7 +86,7 @@
 
         <jdk.version>1.7</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <buildNumber>${user.name}-${maven.build.timestamp}</buildNumber>
+        <buildNumber>${com.xingxing.user.name}-${maven.build.timestamp}</buildNumber>
 
         <jackson.version>2.9.8</jackson.version>
         <orgjson.version>20180130</orgjson.version>
@@ -208,9 +208,9 @@
                     <configuration>
                         <cloverDatabase>${clover.db}</cloverDatabase>
                         <!--
-                        cloverDatabase>${user.home}/.clover/${project.groupId}/jjwt/clover.db</cloverDatabase>
-                        <snapshot>${user.home}/.clover/${project.groupId}/jjwt/clover.snapshot</snapshot>
-                        <historyDir>${user.home}/.clover/${project.groupId}/jjwt</historyDir> -->
+                        cloverDatabase>${com.xingxing.user.home}/.clover/${project.groupId}/jjwt/clover.db</cloverDatabase>
+                        <snapshot>${com.xingxing.user.home}/.clover/${project.groupId}/jjwt/clover.snapshot</snapshot>
+                        <historyDir>${com.xingxing.user.home}/.clover/${project.groupId}/jjwt</historyDir> -->
                         <excludes>
                             <exclude>io/jsonwebtoken/lang/*</exclude>
                         </excludes>

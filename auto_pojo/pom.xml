@@ -9,21 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>auto_commom</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.6.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xingxing</groupId>
-            <artifactId>auto_pojo</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
+    <artifactId>auto_pojo</artifactId>
 
 
 </project>

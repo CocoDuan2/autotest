@@ -1,9 +1,17 @@
 package com.xingxing.user.dao;
 
-import com.xingxing.user.pojo.Project;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface ProjectDao extends JpaRepository<Project,String>,JpaSpecificationExecutor<String>{
+import com.xingxing.user.Project;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+public interface ProjectDao {
+
+    @Select("select * from tb_project") // 查询所有
+    public List<Project> findAll();
+
+
 
 }

@@ -15,7 +15,7 @@ open source under the terms of the [Apache 2.0 License](http://www.apache.org/li
 The library was created by [Okta's](http://www.okta.com) Senior Architect, [Les Hazlewood](https://github.com/lhazlewood)
 and is supported and maintained by a [community](https://github.com/jwtk/jjwt/graphs/contributors) of contributors.
 
-[Okta](https://developer.okta.com/) is a complete authentication and user management API for developers.
+[Okta](https://developer.okta.com/) is a complete authentication and com.xingxing.user management API for developers.
 
 We've also added some convenience extensions that are not part of the specification, such as JWT compression and claim 
 enforcement.
@@ -121,7 +121,7 @@ The bits of information encoded in the body of a JWT are called `claims`. The ex
  
 JWTs can be cryptographically signed (making it a [JWS](https://tools.ietf.org/html/rfc7515)) or encrypted (making it a [JWE](https://tools.ietf.org/html/rfc7516)).
 
-This adds a powerful layer of verifiability to the user of JWTs. The receiver has a high degree of confidence that the JWT has not been tampered with by verifying the signature, for instance.
+This adds a powerful layer of verifiability to the com.xingxing.user of JWTs. The receiver has a high degree of confidence that the JWT has not been tampered with by verifying the signature, for instance.
 
 The compact representation of a signed JWT is a string that has three parts, each separated by a `.`:
 
@@ -1070,7 +1070,7 @@ If a JWT's Claims set is sufficiently large - that is, it contains a lot of name
 very large or verbose - you can reduce the size of the created JWS by compressing the claims body.
 
 This might be important to you if the resulting JWS is used in a URL for example, since URLs are best kept under 
-4096 characters due to browser, user mail agent, or HTTP gateway compatibility issues.  Smaller JWTs also help reduce 
+4096 characters due to browser, com.xingxing.user mail agent, or HTTP gateway compatibility issues.  Smaller JWTs also help reduce 
 bandwidth utilization, which may or may not be important depending on your application's volume or needs.
 
 If you want to compress your JWT, you can use the `JwtBuilder`'s  `compressWith(CompressionAlgorithm)` method.  For 

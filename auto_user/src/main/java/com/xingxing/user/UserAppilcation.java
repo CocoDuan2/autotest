@@ -1,5 +1,7 @@
 package com.xingxing.user;
 
+import com.xingxing.user.utils.JwtUtil;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -9,10 +11,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import util.IdWorker;
-import util.JwtUtil;
 
 @EnableCaching //开启SpringCache缓存
 @SpringBootApplication
+@MapperScan("com.xingxing.user.dao")
 public class UserAppilcation {
     public static void main(String[] args) {
 

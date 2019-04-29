@@ -1,0 +1,4 @@
+jwt:
+  config:
+    key: xingxing
+    ttl: 360000

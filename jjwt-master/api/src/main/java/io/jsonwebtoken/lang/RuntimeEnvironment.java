@@ -38,7 +38,7 @@ public final class RuntimeEnvironment {
         try {
             Class clazz = Classes.forName(BC_PROVIDER_CLASS_NAME);
 
-            //check to see if the user has already registered the BC provider:
+            //check to see if the com.xingxing.user has already registered the BC provider:
 
             Provider[] providers = Security.getProviders();
 

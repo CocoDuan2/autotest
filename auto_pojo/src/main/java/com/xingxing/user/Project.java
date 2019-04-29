@@ -1,4 +1,4 @@
-package com.xingxing.user.pojo;
+package com.xingxing.user;
 
 import lombok.Data;
 import net.sf.oval.constraint.NotNull;
