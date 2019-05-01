@@ -3,12 +3,15 @@ package com.xingxing.user.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.google.common.base.Strings;
 import com.xingxing.user.Project;
 import com.xingxing.user.dao.ProjectDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,21 +24,26 @@ public class ProjectService {
     @Autowired
     private IdWorker idWorker;
 
-    /*public Project addProject(Project project) {
+    public void addProject(Project project) {
 
         project.setId(idWorker.nextId() + "");
+        projectDao.save(project);
 
-        return projectDao.save(project);
 
-
-    }*/
+    }
 
     public Page<Project> getProjectPageList(Project project, Integer page, Integer size) {
 
         //分页并查询
 
         Page<Project> pageInfo = PageHelper.startPage(page, size);
-        List<Project> projectList = projectDao.findAll();
+
+        if (Strings.isNullOrEmpty(project.getProjectName())){
+            List<Project> projectList = projectDao.findAll();
+        } else {
+            List<Project> projectList = projectDao.findAll();
+        }
+
 
         //获取分页信息演示, 实际项目中一般会封装为自己的返回体。
         int pageNum = pageInfo.getPageNum();
@@ -47,4 +55,6 @@ public class ProjectService {
         return pageInfo;
 
     }
+
+
 }

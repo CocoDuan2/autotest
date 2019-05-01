@@ -30,32 +30,30 @@ public class ProjectController {
     private JwtUtil jwtUtil;
 
 
-    /*@CrossOrigin("http://localhost:9528")
     @RequestMapping(value = "/addProject", method = RequestMethod.POST)
-    public Result addProject(Project project) {
+    public Result addProject(@RequestBody Project project) {
 
         try {
             projectService.addProject(project);
-
             return new Result(StatusCode.OK, "项目添加成功", "");
         } catch (Exception e) {
             log.error("项目添加失败", e);
-            return new Result();
+            return new Result(StatusCode.ERROR, "项目添加失败", "");
 
         }
 
-    }*/
+    }
 
     @RequestMapping(value = "/getProjectPageList", method = RequestMethod.POST)
-    public Result getProjectPageList(Project project, @RequestParam(name = "pageNo", required = false, defaultValue =
-            "1") Integer pageNo, @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
+    public Result getProjectPageList(Project project, @RequestParam(name = "pageNo", required = false,
+            defaultValue = "1") Integer pageNo, @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
                                      HttpServletRequest request) {
         try {
             Page<Project> projectPageList = projectService.getProjectPageList(project, pageNo, size);
 
             Map resultMap = new HashMap<>();
-            resultMap.put("total",projectPageList.getTotal());
-            resultMap.put("data",projectPageList.getResult());
+            resultMap.put("total", projectPageList.getTotal());
+            resultMap.put("data", projectPageList.getResult());
 
             return new Result(StatusCode.OK, "成功", new PageResult<Project>(projectPageList.getTotal(),
                     projectPageList.getResult()));
