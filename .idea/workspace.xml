@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="225552f3-ce2b-4023-b1ae-2b584e07b59a" name="Default" comment="">
+    <list default="true" id="225552f3-ce2b-4023-b1ae-2b584e07b59a" name="Default" comment="push">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/auto_base/auto_base.iml" afterPath="$PROJECT_DIR$/auto_base/auto_base.iml" />
-      <change beforePath="$PROJECT_DIR$/auto_user/src/main/java/com/xingxing/user/controller/InterfaceController.java" afterPath="$PROJECT_DIR$/auto_user/src/main/java/com/xingxing/user/controller/InterfaceController.java" />
-      <change beforePath="$PROJECT_DIR$/auto_user/src/main/java/com/xingxing/user/dao/InterfaceDao.java" afterPath="$PROJECT_DIR$/auto_user/src/main/java/com/xingxing/user/dao/InterfaceDao.java" />
-      <change beforePath="$PROJECT_DIR$/auto_user/src/main/java/com/xingxing/user/service/InterfaceService.java" afterPath="$PROJECT_DIR$/auto_user/src/main/java/com/xingxing/user/service/InterfaceService.java" />
-      <change beforePath="$PROJECT_DIR$/auto_user/src/main/resources/application.yml" afterPath="$PROJECT_DIR$/auto_user/src/main/resources/application.yml" />
-      <change beforePath="$PROJECT_DIR$/auto_user/src/main/resources/mybatis/InterfaceMapper.xml" afterPath="$PROJECT_DIR$/auto_user/src/main/resources/mybatis/InterfaceMapper.xml" />
       <change beforePath="$PROJECT_DIR$/auto_user/target/classes/com/xingxing/user/controller/ProjectController.class" afterPath="$PROJECT_DIR$/auto_user/target/classes/com/xingxing/user/controller/ProjectController.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -645,7 +639,7 @@
       <workItem from="1556208537611" duration="52749000" />
       <workItem from="1556721724045" duration="7624000" />
       <workItem from="1558274330109" duration="8215000" />
-      <workItem from="1559047364520" duration="6564000" />
+      <workItem from="1559047364520" duration="6610000" />
     </task>
     <task id="LOCAL-00001" summary="第一次代码提交">
       <created>1556208755398</created>
@@ -724,11 +718,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559134582455</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="push">
+      <created>1559136313805</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1559136313805</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126291000" />
+    <option name="totallyTimeSpent" value="126337000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
