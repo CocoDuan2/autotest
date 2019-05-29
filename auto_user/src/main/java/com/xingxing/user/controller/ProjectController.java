@@ -104,11 +104,10 @@ public class ProjectController {
 
         try {
             ProjectInfoDTO projectInfo = projectService.projectInfo(project_id);
-            return new Result(StatusCode.OK, "项目删除成功", "");
+            return new Result(StatusCode.OK, "项目详情查询成功", projectInfo);
         } catch (Exception e) {
             log.error("项目删除失败", e);
-            return new Result(StatusCode.ERROR, "项目删除失败", "");
-
+            return new Result(StatusCode.ERROR, "项目详情查询失败", null);
         }
     }
 

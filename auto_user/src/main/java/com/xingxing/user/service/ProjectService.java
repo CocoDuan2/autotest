@@ -74,6 +74,7 @@ public class ProjectService {
 
     public ProjectInfoDTO projectInfo(String project_id) {
         ProjectInfoDTO projectInfoDTO = projectDao.projectInfo(project_id);
+
         Integer apiCount = projectDao.apiCount(project_id);
         projectInfoDTO.setApiCount(apiCount);
 
