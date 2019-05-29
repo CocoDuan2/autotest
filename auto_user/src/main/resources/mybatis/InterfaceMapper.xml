@@ -17,21 +17,24 @@
 
     <select id="findAll" parameterType="java.lang.String" resultMap="InterfaceVO">
         SELECT
-            i.id,pg.project_id,pg.group_id,i.name,i.request_type,i.api_address,i.mock_status,u.username,log.operation_time
+        i.id,pg.project_id,pg.group_id,i.name,i.request_type,i.api_address,i.mock_status,u.username,log.operation_time
         FROM
-            tb_interface i
-            INNER JOIN tb_project_group pg ON i.group_id = pg.id
-            INNER JOIN tb_user_operation_log log ON log.operation_id = i.id
-            INNER JOIN tb_user u ON log.user_id = u.id
+        tb_interface i
+        INNER JOIN tb_project_group pg ON i.group_id = pg.id
+        INNER JOIN tb_user_operation_log log ON log.operation_id = i.id
+        INNER JOIN tb_user u ON log.user_id = u.id
         WHERE
-            pg.project_id = #{projectId}
+        pg.project_id = #{projectId}
+        AND
+        <if test="groupId != '' and groupId != null">
+            pg.id = #{groupId}
             AND
-            <if test="groupId != '' and groupId != null">
-                pg.id = #{groupId}
-            </if>
+        </if>
+
+        <if test="name != '' and name != null">
+            pg.name = #{name}
+        </if>
     </select>
-
-
 
 
 </mapper>

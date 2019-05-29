@@ -1,13 +1,15 @@
 package com.xingxing.user.dao;
 
-import com.xingxing.user.vo.InterfaceVO;
+import com.xingxing.user.pojo.Interface;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 public interface InterfaceDao {
 
 
-    List<InterfaceVO> findAll(@Param("projectId") String projectId,@Param("groupId") String groupId);
+    List<Interface> findAll(@Param("name") String name, @Param("projectId") String projectId, @Param("groupId")
+            String groupId);
+
+
 }
