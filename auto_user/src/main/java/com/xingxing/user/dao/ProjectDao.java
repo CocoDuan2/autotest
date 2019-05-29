@@ -43,8 +43,9 @@ public interface ProjectDao {
     @Select("select count(id) from tb_interface where project_id = #{project_id}")
     Integer apiCount(String project_id);
 
-    @Select("")
+    @Select("select count(id) from tb_user_operation_log where project_id = #{project_id}")
     Integer dynamicCount(String project_id);
-    @Select("")
+
+    @Select("select count(id) from tb_project_user where project_id = #{project_id}")
     Integer memberCount(String project_id);
 }

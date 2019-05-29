@@ -72,6 +72,11 @@ public class ProjectService {
 
     }
 
+    /**
+     *  项目详情
+     * @param project_id
+     * @return
+     */
     public ProjectInfoDTO projectInfo(String project_id) {
         ProjectInfoDTO projectInfoDTO = projectDao.projectInfo(project_id);
 
