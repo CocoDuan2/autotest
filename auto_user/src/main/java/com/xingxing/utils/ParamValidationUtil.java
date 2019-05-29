@@ -1,7 +1,6 @@
-package com.xingxing.user.utils;
+package com.xingxing.utils;
 
-import com.xingxing.user.controller.BusinessException;
-import lombok.extern.slf4j.Slf4j;
+import com.xingxing.exception.BusinessException;
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
 import org.slf4j.Logger;

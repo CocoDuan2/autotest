@@ -1,4 +1,4 @@
-package com.xingxing.user;
+package com.xingxing;
 
 import com.pjb.springbootjjwt.interceptor.AuthenticationInterceptor;
 import org.springframework.context.annotation.Bean;

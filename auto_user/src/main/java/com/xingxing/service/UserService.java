@@ -1,7 +1,7 @@
-package com.xingxing.user.service;
+package com.xingxing.service;
 
-import com.xingxing.user.User;
-import com.xingxing.user.dao.UserDao;
+import com.xingxing.PO.User;
+import com.xingxing.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
@@ -16,10 +16,10 @@ public class UserService {
     private IdWorker idWorker;
 
 
-  /*  public void addUser(User user) {
+  /*  public void addUser(User PO) {
 
-        user.setId(idWorker.nextId() + "");
-          userDao.save(user);
+        PO.setId(idWorker.nextId() + "");
+          userDao.save(PO);
 
     }*/
 

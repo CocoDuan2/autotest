@@ -1,7 +1,5 @@
-package com.xingxing.user;
+package com.xingxing.PO;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import lombok.Data;
 
 import javax.persistence.Entity;

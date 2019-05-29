@@ -1,16 +1,18 @@
-package com.xingxing.user.utils;
+package com.xingxing.utils;
 
-import com.sun.media.jfxmedia.logging.Logger;
-import com.xingxing.user.User;
-import io.jsonwebtoken.*;
+import com.xingxing.PO.User;
+import com.xingxing.exception.BusinessException;
+import entity.StatusCode;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import javax.xml.bind.DatatypeConverter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @ConfigurationProperties("jwt.config")
 @Slf4j
@@ -44,7 +46,7 @@ public class JwtUtil {
      * @param user      登录成功的user对象
      * @return
      */
-    public  String createJWT(User user) {
+    public String createJWT(User user) {
         //指定签名的时候使用的签名算法，也就是header那部分，jjwt已经将这部分内容封装好了。
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
@@ -94,7 +96,7 @@ public class JwtUtil {
      * @param user  用户的对象
      * @return
      */
-    public  Claims parseJWT(String token, User user) {
+    public Claims parseJWT(String token, User user) {
         //签名秘钥，和生成的签名的秘钥一模一样
         String key = user.getPassword();
 
@@ -129,10 +131,11 @@ public class JwtUtil {
                     //设置需要解析的jwt
                     .parseClaimsJws(token).getBody();
         } catch (Exception e) {
-            log.error("JWT验证出错，错误原因：{}"+e.getMessage());
+            log.error("JWT验证出错", e);
+            throw new BusinessException(StatusCode.LOGINTIMEOUT, "登录超时,请重新登录");
         }
 
-        if (claims.get("password").equals(user.getPassword())) {
+        if (claims.get("username").equals(user.getUsername())) {
             return true;
         }
 

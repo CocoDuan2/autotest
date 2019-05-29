@@ -1,4 +1,4 @@
-package com.xingxing.user.utils;
+package com.xingxing.utils;
 import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

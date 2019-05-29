@@ -1,13 +1,8 @@
-package com.xingxing.user;
+package com.xingxing.PO;
 
-import com.xingxing.user.base.BaseEntity;
+import com.xingxing.PO.base.BaseEntity;
 import lombok.Data;
 import net.sf.oval.constraint.NotNull;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
 
 @Data
 public class Project extends BaseEntity {

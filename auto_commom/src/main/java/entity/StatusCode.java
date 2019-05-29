@@ -10,4 +10,6 @@ public interface StatusCode {
     int ACCESSERROR = 20003;//权限不足
     int REMOTEERROR = 20004;//远程调用失败
     int REPERROR = 20005;//重复操作
+    int LOGINTIMEOUT = 20006;//登录超时
+    int PROJECTREEOR = 30001;//项目错误
 }

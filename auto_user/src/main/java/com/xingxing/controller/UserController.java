@@ -1,10 +1,10 @@
-package com.xingxing.user.controller;
+package com.xingxing.controller;
 
 
 import annotation.LoginToken;
-import com.xingxing.user.User;
-import com.xingxing.user.service.UserService;
-import com.xingxing.user.utils.JwtUtil;
+import com.xingxing.PO.User;
+import com.xingxing.service.UserService;
+import com.xingxing.utils.JwtUtil;
 import entity.Result;
 import entity.StatusCode;
 import io.swagger.annotations.ApiOperation;
