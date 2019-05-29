@@ -1,4 +1,4 @@
-package com.xingxing.user;
+package com.xingxing.user.pojo;
 
 import com.xingxing.user.base.BaseEntity;
 import lombok.Data;
@@ -14,6 +14,7 @@ public class Project extends BaseEntity {
 
 
     @NotNull(message = "项目名不能为空")
+    @Id
     private String projectName;
 
     @NotNull(message = "版本不能为空")

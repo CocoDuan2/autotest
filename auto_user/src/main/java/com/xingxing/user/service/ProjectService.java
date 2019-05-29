@@ -4,14 +4,12 @@ package com.xingxing.user.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.base.Strings;
-import com.xingxing.user.Project;
+import com.xingxing.user.pojo.Project;
 import com.xingxing.user.dao.ProjectDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Service

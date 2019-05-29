@@ -1,6 +1,6 @@
 package com.xingxing.user.service;
 
-import com.xingxing.user.User;
+import com.xingxing.user.pojo.User;
 import com.xingxing.user.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

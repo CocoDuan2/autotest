@@ -1,10 +1,8 @@
 package com.xingxing.user.dao;
 
-import com.xingxing.user.User;
+import com.xingxing.user.pojo.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
-
 
 
 public interface UserDao {

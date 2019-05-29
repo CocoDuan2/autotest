@@ -1,4 +1,4 @@
-package com.xingxing.user;
+package com.xingxing.user.pojo;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

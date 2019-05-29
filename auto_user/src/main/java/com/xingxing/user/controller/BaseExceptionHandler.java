@@ -13,11 +13,20 @@ public class BaseExceptionHandler extends RuntimeException {
 
 
 
-    @ExceptionHandler
+    @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public Result error(Exception e) {
         log.error("统一异常处理:",e);
         //log.error("统一异常处理:",e.getMessage());
         return new Result(false, StatusCode.ERROR, e.getMessage(),"");
+    }
+
+
+    @ExceptionHandler(BusinessException.class)
+    @ResponseBody
+    public Result error(BusinessException e) {
+        log.error("统一异常处理:",e);
+        //log.error("统一异常处理:",e.getMessage());
+        return new Result(false, e.getCode(), e.getMessage(),"");
     }
 }

@@ -1,16 +1,15 @@
 package com.xingxing.user.utils;
 
-import com.sun.media.jfxmedia.logging.Logger;
-import com.xingxing.user.User;
+import com.xingxing.user.pojo.User;
+import com.xingxing.user.controller.BusinessException;
+import entity.StatusCode;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import javax.xml.bind.DatatypeConverter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @ConfigurationProperties("jwt.config")
 @Slf4j
@@ -129,7 +128,8 @@ public class JwtUtil {
                     //设置需要解析的jwt
                     .parseClaimsJws(token).getBody();
         } catch (Exception e) {
-            log.error("JWT验证出错，错误原因：{}"+e.getMessage());
+            log.error("JWT验证出错，错误原因：{}",e.getMessage());
+            throw new BusinessException(StatusCode.ERROR,"");
         }
 
         if (claims.get("password").equals(user.getPassword())) {

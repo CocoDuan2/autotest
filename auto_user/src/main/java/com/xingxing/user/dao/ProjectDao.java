@@ -1,10 +1,9 @@
 package com.xingxing.user.dao;
 
 
-import com.xingxing.user.Project;
+import com.xingxing.user.pojo.Project;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

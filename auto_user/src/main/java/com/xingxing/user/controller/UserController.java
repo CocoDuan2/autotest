@@ -2,7 +2,7 @@ package com.xingxing.user.controller;
 
 
 import annotation.LoginToken;
-import com.xingxing.user.User;
+import com.xingxing.user.pojo.User;
 import com.xingxing.user.service.UserService;
 import com.xingxing.user.utils.JwtUtil;
 import entity.Result;

@@ -2,7 +2,7 @@ package com.xingxing.user.controller;
 
 
 import com.github.pagehelper.Page;
-import com.xingxing.user.Project;
+import com.xingxing.user.pojo.Project;
 import com.xingxing.user.service.ProjectService;
 import com.xingxing.user.utils.JwtUtil;
 import entity.PageResult;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -46,8 +45,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/getProjectPageList", method = RequestMethod.POST)
     public Result getProjectPageList(Project project, @RequestParam(name = "pageNo", required = false,
-            defaultValue = "1") Integer pageNo, @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
-                                     HttpServletRequest request) {
+            defaultValue = "1") Integer pageNo, @RequestParam(name = "size", required = false, defaultValue = "10") Integer size) {
         try {
             Page<Project> projectPageList = projectService.getProjectPageList(project, pageNo, size);
 
@@ -62,5 +60,8 @@ public class ProjectController {
             return new Result(StatusCode.ERROR, "项目查询失败", null);
         }
     }
+
+
+
 
 }

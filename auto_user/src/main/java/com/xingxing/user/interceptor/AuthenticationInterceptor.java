@@ -2,11 +2,10 @@ package com.pjb.springbootjjwt.interceptor;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.xingxing.user.User;
+import com.xingxing.user.pojo.User;
 import com.xingxing.user.service.UserService;
 import com.xingxing.user.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
