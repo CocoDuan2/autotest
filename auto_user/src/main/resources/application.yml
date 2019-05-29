@@ -18,9 +18,9 @@ server:
 
 spring:
   application:
-    name: auto_user
+    name: auto_test
   datasource:
-    url: jdbc:mysql://47.106.37.43:33306/auto_user?characterEncoding=UTF8
+    url: jdbc:mysql://47.106.37.43:33306/auto_test?characterEncoding=UTF8
     username: root
     password: root
     # 使用druid数据源
