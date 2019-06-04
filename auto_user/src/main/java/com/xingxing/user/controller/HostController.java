@@ -1,7 +1,7 @@
 package com.xingxing.user.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.xingxing.user.service.UserService;
+import com.xingxing.user.service.HostService;
 import entity.Result;
 import entity.StatusCode;
 import lombok.extern.slf4j.Slf4j;
@@ -12,29 +12,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/host")
 @Slf4j
 @CrossOrigin(origins = "*")
-public class MemberController {
+public class HostController {
 
     @Autowired
-    UserService userService;
+    HostService hostService;
 
     /**
-     * 项目人员
+     * HOST查询
      *
      * @param project_id
      * @return
      */
-    @RequestMapping(value = "/project_member", method = RequestMethod.GET)
-    public Result projectMember(String project_id, Integer page) {
+    @RequestMapping(value = "/host_total", method = RequestMethod.GET)
+    public Result hostTotal(String project_id, Integer page, String name) {
 
         try {
-            PageInfo pageInfo = userService.projectMember(project_id, page);
-            return new Result(StatusCode.OK, "项目人员查询成功", pageInfo);
+            PageInfo pageInfo = hostService.hostTotal(project_id, page, name);
+            return new Result(StatusCode.OK, "HOST查询成功", pageInfo);
         } catch (Exception e) {
-            log.error("项目详情查询失败", e);
-            return new Result(StatusCode.ERROR, "项目人员查询失败", null);
+            log.error("HOST查询失败", e);
+            return new Result(StatusCode.ERROR, "HOST查询失败", null);
         }
     }
 }
