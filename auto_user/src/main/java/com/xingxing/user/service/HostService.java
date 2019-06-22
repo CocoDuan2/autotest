@@ -1,12 +1,13 @@
 package com.xingxing.user.service;
 
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xingxing.user.dao.HostDao;
+import com.xingxing.user.pojo.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.testng.util.Strings;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.Map;
 @Service
 public class HostService {
 
-    @Autowired
+    @Autowired(required = false)
     HostDao hostDao;
 
     /**
@@ -30,5 +31,32 @@ public class HostService {
         List<Map<String, Object>> maps = hostDao.hostTotal(project_id, name);
         PageInfo<Map<String, Object>> mapPageInfo = new PageInfo<>(maps);
         return mapPageInfo;
+    }
+
+    /**
+     * 删除
+     *
+     * @param hostId
+     */
+    public void hostDelete(String hostId) {
+        hostDao.hostDelete(hostId);
+    }
+
+    /**
+     * 更新
+     *
+     * @param configuration
+     */
+    public void hostUpdate(Configuration configuration) {
+        String id = configuration.getId();
+        if (Strings.isNullOrEmpty(id)) {
+            hostDao.insertHost(configuration);
+        } else {
+            hostDao.hostUpdate(configuration);
+        }
+    }
+
+    public Configuration selectById(String id) {
+        return hostDao.selectById(id);
     }
 }
