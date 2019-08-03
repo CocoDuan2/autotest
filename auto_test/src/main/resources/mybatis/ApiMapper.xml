@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xingxing.user.dao.ApiDao">
+    <!--
+        <update id="hostUpdate" parameterType="com.xingxing.user.pojo.Configuration">
+            UPDATE tb_configuration
+            <trim prefix="set" suffixOverrides=",">
+                <if test="name != '' and name != null">
+                    name = #{name},
+                </if>
+                <if test="host != '' and host != null">
+                    host = #{host},
+                </if>
+                <if test="port != '' and port != null">
+                    port = #{port},
+                </if>
+                <if test="description != '' and description != null">
+                    description = #{description},
+                </if>
+                <if test="status != '' and status != null">
+                    status = #{status},
+                </if>
+            </trim>
+            where id = #{id}
+        </update>
+
+        <insert id="insertHost" parameterType="com.xingxing.user.pojo.Configuration">
+            INSERT INTO tb_configuration
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != '' and id != null">
+                    id,
+                </if>
+                <if test="name != '' and name != null">
+                    name,
+                </if>
+                <if test="project_id != '' and project_id != null">
+                    project_id,
+                </if>
+                <if test="host != '' and host != null">
+                    host,
+                </if>
+                <if test="port != '' and port != null">
+                    port,
+                </if>
+                <if test="description != '' and description != null">
+                    description,
+                </if>
+                <if test="status != '' and status != null">
+                    status,
+                </if>
+
+            </trim>
+            <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+                <if test="id != '' and id != null">
+                    #{id},
+                </if>
+
+                <if test="name != '' and name != null">
+                    #{name},
+                </if>
+                <if test="project_id != '' and project_id != null">
+                    #{project_id},
+                </if>
+                <if test="host != '' and host != null">
+                    #{host},
+                </if>
+                <if test="port != '' and port != null">
+                    #{port},
+                </if>
+                <if test="description != '' and description != null">
+                    #{description},
+                </if>
+                <if test="status != '' and status != null">
+                    #{status},
+                </if>
+            </trim>
+        </insert>
+
+        <select id="hostTotal" parameterType="string" resultType="map">
+
+            select * from tb_configuration where
+            <if test="project_id !='' and project_id != null">
+                project_id =#{project_id}
+            </if>
+            <if test="name !='' and name != null">
+                and name =#{name}
+            </if>
+        </select>-->
+
+    <resultMap id="InterfaceDTO" type="com.xingxing.user.dto.InterfaceDTO">
+        <id property="id" column="id"/>
+        <collection property="project_id" column="project_id"/>
+        <collection property="name" column="name"/>
+        <collection property="requestType" column="request_type"/>
+        <collection property="apiAddress" column="api_address"/>
+        <collection property="mockStatus" column="mock_status"/>
+        <collection property="userName" column="userName"/>
+        <collection property="operationTime" column="operation_time"/>
+        <collection property="groupId" column="group_id"/>
+        <collection property="apiGroupLevelFirst_id" column="group_id"/>
+    </resultMap>
+    <select id="findApiList" parameterType="com.xingxing.user.dto.InterfaceDTO"
+            resultType="com.xingxing.user.dto.InterfaceDTO">
+        SELECT i.id,
+        i.group_id,
+        i.`name`,
+        i.request_type,
+        i.api_address,
+        mock_status,
+        i.request_parameter_type,
+        i.http_type,
+        i.project_id,
+        uol.operation_time operationTime,
+        u.username userName
+        FROM tb_interface i
+        INNER JOIN tb_user_operation_log uol on (uol.operation_id = i.id and i.project_id = uol.project_id)
+        INNER JOIN tb_user u on u.id = uol.user_id
+        where i.project_id =#{project_id}
+
+        <if test="apiGroupLevelFirst_id != null and apiGroupLevelFirst_id != ''">
+            and i.group_id = #{apiGroupLevelFirst_id}
+        </if>
+        <if test="name != null and name != ''">
+            and i.name = #{name}
+        </if>
+    </select>
+
+    <insert id="save" parameterType="com.xingxing.user.dto.ApiDTO">
+        INSERT INTO tb_configuration
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != '' and id != null">
+                id,
+            </if>
+            <if test="name != '' and name != null">
+                name,
+            </if>
+            <if test="apiGroupLevelFirst_id != '' and apiGroupLevelFirst_id != null">
+                group_id,
+            </if>
+            <if test="project_id != '' and project_id != null">
+                project_id,
+            </if>
+            <if test="requestType != '' and requestType != null">
+                request_type,
+            </if>
+            <if test="apiAddress != '' and apiAddress != null">
+                api_address,
+            </if>
+            <if test="data != '' and data != null">
+                data,
+            </if>
+            <if test="mockCode != '' and mockCode != null">
+                mock_code,
+            </if>
+            <if test="description != '' and description != null">
+                description,
+            </if>
+            <if test="httpType != '' and httpType != null">
+                http_type,
+            </if>
+            <if test="requestParameterType != '' and requestParameterType != null">
+                request_parameter_type,
+            </if>
+            <if test="requestType != '' and requestType != null">
+                request_type,
+            </if>
+            <if test="status != '' and status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="id != '' and id != null">
+                #{id},
+            </if>
+            <if test="name != '' and name != null">
+                #{name},
+            </if>
+            <if test="apiGroupLevelFirst_id != '' and apiGroupLevelFirst_id != null">
+                #{apiGroupLevelFirst_id},
+            </if>
+            <if test="project_id != '' and project_id != null">
+                #{project_id},
+            </if>
+            <if test="requestType != '' and requestType != null">
+                #{requestType},
+            </if>
+            <if test="apiAddress != '' and apiAddress != null">
+                #{apiAddress},
+            </if>
+            <if test="data != '' and data != null">
+                #{data},
+            </if>
+            <if test="mockCode != '' and mockCode != null">
+                #{mockCode},
+            </if>
+            <if test="description != '' and description != null">
+                #{description},
+            </if>
+            <if test="httpType != '' and httpType != null">
+                #{httpType},
+            </if>
+            <if test="requestParameterType != '' and requestParameterType != null">
+                #{requestParameterType},
+            </if>
+            <if test="requestType != '' and requestType != null">
+                #{requestType},
+            </if>
+            <if test="status != '' and status != null">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+</mapper>

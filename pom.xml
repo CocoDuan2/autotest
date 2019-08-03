@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xingxing</groupId>
-    <artifactId>auto_test</artifactId>
+    <artifactId>auto_parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>auto_commom</module>
         <module>auto_base</module>
-        <module>auto_user</module>
+        <module>auto_test</module>
         <module>auto_pojo</module>
     </modules>
 

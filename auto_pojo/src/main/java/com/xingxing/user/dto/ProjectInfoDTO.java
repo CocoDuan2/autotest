@@ -19,4 +19,5 @@ public class ProjectInfoDTO implements Serializable {
     private String type;
     private String user;
     private String version;
+    private String project_id;
 }

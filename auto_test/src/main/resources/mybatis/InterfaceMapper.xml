@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xingxing.user.dao.InterfaceDao">
+
+    <resultMap type="com.xingxing.user.dto.InterfaceDTO" id="InterfaceVO">
+        <id column="id" property="id"/>
+        <result column="project_id" property="projectId"/>
+        <result column="group_id" property="groupId"/>
+        <result column="name" property="name"/>
+        <result column="request_type" property="requestType"/>
+        <result column="api_address" property="apiAddress"/>
+        <result column="mock_status" property="mockStatus"/>
+        <result column="username" property="userName"/>
+        <result column="operation_time" property="operationTime"/>
+    </resultMap>
+
+    <select id="findAll" parameterType="java.lang.String" resultMap="InterfaceVO">
+        SELECT
+        i.id,pg.project_id,pg.group_id,i.name,i.request_type,i.api_address,i.mock_status,u.username,log.operation_time
+        FROM
+        tb_interface i
+        INNER JOIN tb_project_group pg ON i.group_id = pg.id
+        INNER JOIN tb_user_operation_log log ON log.operation_id = i.id
+        INNER JOIN tb_user u ON log.user_id = u.id
+        WHERE
+        pg.project_id = #{projectId}
+        AND
+        <if test="groupId != '' and groupId != null">
+            pg.id = #{groupId}
+            AND
+        </if>
+
+        <if test="name != '' and name != null">
+            pg.name = #{name}
+        </if>
+    </select>
+
+
+    <delete id="delByIds" parameterType="java.util.List">
+        delete from tb_interface where 1>2
+            or id in
+        <foreach collection="ids" item="item" open="(" separator="," close=")">
+                 #{item}
+        </foreach>
+
+    </delete>
+
+
+</mapper>
