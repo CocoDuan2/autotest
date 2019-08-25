@@ -70,6 +70,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             try {
 
                 userId = JWT.decode(token).getClaim("id").asString();
+                httpServletRequest.setAttribute("userId", userId);
             } catch (JWTDecodeException j) {
                 throw new RuntimeException("访问异常！");
             }

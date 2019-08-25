@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface APIResponseDao {
     void save(@Param("responseList") List<ResponseDTO> responseList, @Param("apiId") String apiId);
+
+    void deleteByInterfaceId(@Param("ids") List<String> ids);
 }

@@ -38,12 +38,13 @@
 
 
     <delete id="delByIds" parameterType="java.util.List">
-        delete from tb_interface where 1>2
-            or id in
-        <foreach collection="ids" item="item" open="(" separator="," close=")">
-                 #{item}
-        </foreach>
-
+        delete from tb_interface
+        <where>
+             id in
+            <foreach collection="ids" item="item" open="(" separator="," close=")">
+                     #{item}
+            </foreach>
+        </where>
     </delete>
 
 

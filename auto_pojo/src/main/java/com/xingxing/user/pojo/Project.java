@@ -13,8 +13,11 @@ import java.io.Serializable;
 public class Project extends BaseEntity {
 
 
-    @NotNull(message = "项目名不能为空")
+    @NotNull(message = "项目id不能为空")
     @Id
+    private String id;
+
+    @NotNull(message = "项目名不能为空")
     private String projectName;
 
     @NotNull(message = "版本不能为空")
@@ -26,7 +29,7 @@ public class Project extends BaseEntity {
 
     private String description;
 
-    // @NotNull(message = "项目状态不能为空")
+
 
 
 }

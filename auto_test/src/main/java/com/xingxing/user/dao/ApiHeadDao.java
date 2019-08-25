@@ -8,4 +8,5 @@ import java.util.List;
 public interface ApiHeadDao {
     void save(@Param("headDict") List<HeadDTO> headDict, @Param("apiId") String apiId);
 
+    void deleteByInterfaceId(@Param("ids") List<String> ids);
 }

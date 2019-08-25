@@ -26,6 +26,8 @@ public class InterfaceDTO implements Serializable {
     private String operationTime;
     private String apiGroupLevelFirst_id;
     private Integer page;
+    private Integer interfaceType;
+    private String description;
 }
 
 

@@ -23,4 +23,6 @@ public class Interface {
     private String requestParamterType;
     private String httpType;
 
+    private Integer interfaceType;
+
 }

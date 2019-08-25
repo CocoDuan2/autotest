@@ -39,6 +39,10 @@ public class ApiDTO implements Serializable {
      */
     private String mockCode;
     /**
+     * mock
+     */
+    private String mockStatus;
+    /**
      * 接口名
      */
     private String name;

@@ -11,6 +11,6 @@ public class Group implements Serializable {
     public String id;
     public String name;
     public String project_id;
-
+    public Integer group_type;
 
 }

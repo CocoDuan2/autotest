@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class HeadDTO implements Serializable {
+    private String id;
     private String name;
     private String value;
 }

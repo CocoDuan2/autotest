@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class ProjectInfoDTO implements Serializable {
@@ -29,4 +30,5 @@ public class ProjectInfoDTO implements Serializable {
     private String user;
     private String version;
     private String project_id;
+    private List<String> ids;
 }

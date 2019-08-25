@@ -100,22 +100,28 @@
         <collection property="groupId" column="group_id"/>
         <collection property="apiGroupLevelFirst_id" column="group_id"/>
     </resultMap>
+
     <select id="findApiList" parameterType="com.xingxing.user.dto.InterfaceDTO"
             resultType="com.xingxing.user.dto.InterfaceDTO">
-        SELECT i.id,
-        i.group_id,
+        SELECT
+        i.id,
+        i.group_id groupId,
+        i.group_id apiGroupLevelFirst_id,
         i.`name`,
         i.request_type,
         i.api_address,
-        mock_status,
+        i.mock_status mockStatus,
         i.request_parameter_type,
         i.http_type,
         i.project_id,
+        i.description,
         uol.operation_time operationTime,
         u.username userName
-        FROM tb_interface i
-        INNER JOIN tb_user_operation_log uol on (uol.operation_id = i.id and i.project_id = uol.project_id)
-        INNER JOIN tb_user u on u.id = uol.user_id
+        FROM
+        tb_interface i
+        INNER JOIN ( SELECT * FROM tb_user_operation_log WHERE id IN ( SELECT max( id ) FROM tb_user_operation_log GROUP
+        BY operation_id, operation_type ) ) uol ON ( uol.operation_id = i.id AND i.project_id = uol.project_id )
+        INNER JOIN tb_user u ON u.id = uol.user_id
         where i.project_id =#{project_id}
 
         <if test="apiGroupLevelFirst_id != null and apiGroupLevelFirst_id != ''">
@@ -124,10 +130,11 @@
         <if test="name != null and name != ''">
             and i.name = #{name}
         </if>
+
     </select>
 
     <insert id="save" parameterType="com.xingxing.user.dto.ApiDTO">
-        INSERT INTO tb_configuration
+        INSERT INTO tb_interface
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != '' and id != null">
                 id,
@@ -162,9 +169,7 @@
             <if test="requestParameterType != '' and requestParameterType != null">
                 request_parameter_type,
             </if>
-            <if test="requestType != '' and requestType != null">
-                request_type,
-            </if>
+
             <if test="status != '' and status != null">
                 status,
             </if>
@@ -203,12 +208,198 @@
             <if test="requestParameterType != '' and requestParameterType != null">
                 #{requestParameterType},
             </if>
-            <if test="requestType != '' and requestType != null">
-                #{requestType},
-            </if>
+
             <if test="status != '' and status != null">
                 #{status},
             </if>
         </trim>
     </insert>
+
+    <resultMap id="BaseApiDTO" type="com.xingxing.user.dto.ApiDTO">
+        <id column="id" property="id"/>
+        <id column="api_address" property="apiAddress"/>
+        <id column="group_id" property="apiGroupLevelFirst_id"/>
+        <id column="data" property="data"/>
+        <id column="description" property="description"/>
+        <id column="http_type" property="httpType"/>
+        <id column="name" property="name"/>
+        <id column="project_id" property="project_id"/>
+        <id column="request_parameter_type" property="requestParameterType"/>
+        <id column="request_type" property="requestType"/>
+        <id column="status" property="status"/>
+        <id column="mock_code" property="mockCode"/>
+        <id column="mock_status" property="mockStatus"/>
+        <collection property="headDict" ofType="com.xingxing.user.dto.HeadDTO">
+            <id column="head_id" property="id"/>
+            <result column="head_name" property="name"/>
+            <result column="head_value" property="value"/>
+        </collection>
+        <collection property="requestList" ofType="com.xingxing.user.dto.RequestDTO">
+            <id column="param_id" property="id"/>
+            <result column="param_name" property="name"/>
+            <result column="param_value" property="value"/>
+            <result column="param_description" property="description"/>
+            <result column="param_required" property="required"/>
+            <result column="param_restrict" property="restrict"/>
+            <result column="param_type" property="_type"/>
+        </collection>
+        <collection property="responseList" ofType="com.xingxing.user.dto.ResponseDTO">
+            <id column="response_id" property="id"/>
+            <result column="response_name" property="name"/>
+            <result column="response_value" property="value"/>
+            <result column="response_description" property="description"/>
+            <result column="response_required" property="required"/>
+            <result column="response_type" property="_type"/>
+        </collection>
+    </resultMap>
+
+    <select id="findOne" parameterType="com.xingxing.user.dto.ApiDTO"
+            resultMap="BaseApiDTO">
+        SELECT
+            i.id,
+            i.group_id,
+            i.name,
+            i.request_type,
+            i.api_address,
+            i.mock_code,
+            i.request_parameter_type,
+            i.http_type,
+            i.project_id,
+            i.status,
+            i.description,
+            i.data,
+            i.mock_status,
+            ih.id head_id,
+            ih.name head_name,
+            ih.value head_value,
+            ip.id param_id,
+            ip.name param_name,
+            ip.value param_value,
+            ip.description param_description,
+            ip.param_required,
+            ip.param_restrict,
+            ip.param_type,
+            ir.id response_id,
+            ir.name response_name,
+            ir.value response_value,
+            ir.description response_description,
+            ir.response_required,
+            ir.response_type
+            FROM tb_interface i LEFT JOIN tb_interface_head ih on i.id = ih.interface_id
+            LEFT JOIN tb_interface_param ip on i.id = ip.interface_id
+            LEFT JOIN tb_interface_response ir ON ir.interface_id = i.id
+            where i.id = #{api_id} and i.project_id = #{project_id}
+    </select>
+
+
+<delete id="deleteApi">
+    delete from tb_interface
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+            </foreach>
+        </where>
+</delete>
+
+
+    <update id="update" parameterType="com.xingxing.user.dto.ApiDTO">
+        UPDATE tb_interface
+        <trim prefix="set" suffixOverrides=",">
+
+            <if test="name != '' and name != null">
+                name = #{name},
+            </if>
+            <if test="apiGroupLevelFirst_id != '' and apiGroupLevelFirst_id != null">
+                group_id = #{apiGroupLevelFirst_id},
+            </if>
+            <if test="project_id != '' and project_id != null">
+                project_id = #{project_id},
+            </if>
+            <if test="requestType != '' and requestType != null">
+                request_type = #{requestType},
+            </if>
+            <if test="apiAddress != '' and apiAddress != null">
+                api_address = #{apiAddress},
+            </if>
+            <if test="data != '' and data != null">
+                data = #{data},
+            </if>
+            <if test="mockCode != '' and mockCode != null">
+                mock_code = #{mockCode},
+            </if>
+            <if test="mockStatus != '' and mockStatus != null">
+                mock_status = #{mockStatus},
+            </if>
+
+            <if test="description != '' and description != null">
+                description = #{description},,
+            </if>
+            <if test="httpType != '' and httpType != null">
+                http_type = #{httpType},
+            </if>
+            <if test="requestParameterType != '' and requestParameterType != null">
+                request_parameter_type = #{requestParameterType},
+            </if>
+
+            <if test="status != '' and status != null">
+                status = #{status},
+            </if>
+        </trim>
+
+        WHERE id = #{id}
+    </update>
+
+
+    <insert id="addHistory" parameterType="com.xingxing.user.pojo.ApiHistory">
+        INSERT INTO tb_interface_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != '' and id != null">
+                id,
+            </if>
+            <if test="interfaceId != '' and interfaceId != null">
+                interface_id,
+            </if>
+            <if test="requestAddress != '' and requestAddress != null">
+                request_address,
+            </if>
+            <if test="requestType != '' and requestType != null">
+                request_type,
+            </if>
+            <if test="httpCode != '' and httpCode != null">
+                http_code,
+            </if>
+            <if test="operationTime != '' and operationTime != null">
+                operation_time,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="id != '' and id != null">
+                #{id},
+            </if>
+            <if test="interfaceId != '' and interfaceId != null">
+                #{interfaceId},
+            </if>
+            <if test="requestAddress != '' and requestAddress != null">
+                #{requestAddress},
+            </if>
+            <if test="requestType != '' and requestType != null">
+                #{requestType},
+            </if>
+            <if test="httpCode != '' and httpCode != null">
+                #{httpCode},
+            </if>
+            <if test="operationTime != '' and operationTime != null">
+                #{operationTime},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="hisotoryList" parameterType="String" resultType="com.xingxing.user.pojo.ApiHistory">
+        SELECT id,operation_time,request_type,request_address,http_code
+        FROM tb_interface_history
+        where interface_id = #{interfaceId}
+        ORDER BY operation_time desc
+        LIMIT 0,10
+    </select>
 </mapper>

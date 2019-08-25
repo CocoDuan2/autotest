@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xingxing.user.dao.CaseDao">
+
+    <resultMap id="InterfaceDTO" type="com.xingxing.user.dto.InterfaceDTO">
+        <id property="id" column="id"/>
+        <collection property="project_id" column="project_id"/>
+        <collection property="name" column="name"/>
+        <collection property="requestType" column="request_type"/>
+        <collection property="apiAddress" column="api_address"/>
+        <collection property="mockStatus" column="mock_status"/>
+        <collection property="userName" column="userName"/>
+        <collection property="operationTime" column="operation_time"/>
+        <collection property="groupId" column="group_id"/>
+        <collection property="apiGroupLevelFirst_id" column="group_id"/>
+    </resultMap>
+
+    <select id="findCaseList" parameterType="com.xingxing.user.pojo.Case"
+            resultType="com.xingxing.user.pojo.Case">
+        SELECT
+        i.id,
+        i.group_id,
+        i.case_name,
+        i.description,
+        uol.operation_time operationTime,
+        u.username userName
+        FROM
+        tb_case i
+        INNER JOIN ( SELECT * FROM tb_user_operation_log WHERE id IN ( SELECT max( id ) FROM tb_user_operation_log GROUP
+        BY operation_id, operation_type ) ) uol ON ( uol.operation_id = i.id AND i.project_id = uol.project_id )
+        INNER JOIN tb_user u ON u.id = uol.user_id
+        where
+        <if test="group_id != null and group_id != ''">
+            group_id = #{group_id}
+        </if>
+        <if test="case_name != null and case_name != ''">
+            and case_name = #{case_name}
+        </if>
+
+    </select>
+
+    <insert id="insertCas" parameterType="com.xingxing.user.pojo.Case">
+        INSERT INTO tb_case
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != '' and id != null">
+                id,
+            </if>
+            <if test="case_name != '' and case_name != null">
+                case_name,
+            </if>
+            <if test="group_id != '' and group_id != null">
+                group_id,
+            </if>
+            <if test="description != '' and description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="id != '' and id != null">
+                #{id},
+            </if>
+            <if test="case_name != '' and case_name != null">
+                #{case_name},
+            </if>
+            <if test="group_id != '' and group_id != null">
+                #{group_id},
+            </if>
+            <if test="description != '' and description != null">
+                #{description},
+            </if>
+        </trim>
+    </insert>
+
+
+
+    <delete id="delCase">
+        delete from tb_case
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+
+
+    <update id="updateCase" parameterType="com.xingxing.user.pojo.Case">
+        UPDATE tb_case
+        <trim prefix="set" suffixOverrides=",">
+
+            <if test="case_name != '' and case_name != null">
+                case_name = #{case_name},
+            </if>
+            <if test="group_id != '' and group_id != null">
+                group_id = #{group_id},
+            </if>
+            <if test="description != '' and description != null">
+                description = #{description},
+            </if>
+        </trim>
+
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="apiList" parameterType="java.lang.String" resultType="java.util.Map">
+        SELECT
+            i.id,
+            i.NAME,
+            i.api_address apiAddress,
+            i.request_type requestType,
+            'false' testStatus
+        FROM
+            tb_case_interface ci
+            INNER JOIN tb_interface i ON i.id = ci.interface_id
+        WHERE
+            ci.case_id = #{id}
+    </select>
+
+    <insert id="addOldApi" parameterType="com.xingxing.user.dto.OldApiAddCaseDTO">
+        insert into
+        tb_case_interface(case_id,interface_id)
+        VALUES
+        <foreach collection="api_ids" item="apiId" separator=",">
+            (#{case_id}, #{apiId})
+        </foreach>
+    </insert>
+
+</mapper>

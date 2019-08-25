@@ -31,13 +31,6 @@ public class InterfaceService {
         List<Interface> interfaceList = interfaceDao.findAll(i.getName(), i.getProjectId(), i.getGroupId());
 
 
-        //获取分页信息演示, 实际项目中一般会封装为自己的返回体。
-        int pageNum = pageInfo.getPageNum();
-        int pageSize = pageInfo.getPageSize();
-        long total = pageInfo.getTotal();
-
-        List<Interface> result = pageInfo.getResult();
-
         return pageInfo;
     }
 

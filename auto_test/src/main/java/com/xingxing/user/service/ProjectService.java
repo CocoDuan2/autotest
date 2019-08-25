@@ -34,9 +34,9 @@ public class ProjectService {
         if (Strings.isNullOrEmpty(project.getId())) {
             project.setId(idWorker.nextId() + "");
         } else {
-            String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-            project.setLastUpdateTime(format);
+            project.setLastUpdateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
         }
+
         projectDao.save(project);
 
 
@@ -55,12 +55,6 @@ public class ProjectService {
         }
 
 
-        //获取分页信息演示, 实际项目中一般会封装为自己的返回体。
-        int pageNum = pageInfo.getPageNum();
-        int pageSize = pageInfo.getPageSize();
-        long total = pageInfo.getTotal();
-
-        List<Project> result = pageInfo.getResult();
 
         return pageInfo;
 
@@ -89,5 +83,10 @@ public class ProjectService {
         //Integer memberCount = projectDao.memberCount(project_id);
         projectInfoDTO.setMemberCount(0);
         return projectInfoDTO;
+    }
+
+    public void updateProject(Project project) {
+        project.setLastUpdateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
+        projectDao.updateProject(project);
     }
 }

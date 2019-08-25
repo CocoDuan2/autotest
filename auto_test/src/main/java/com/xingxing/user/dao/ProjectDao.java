@@ -3,9 +3,7 @@ package com.xingxing.user.dao;
 
 import com.xingxing.user.dto.ProjectInfoDTO;
 import com.xingxing.user.pojo.Project;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -18,7 +16,9 @@ public interface ProjectDao {
     @Insert("INSERT INTO tb_project (id,project_name,version,type,description,status,last_update_time,create_time) " +
             "VALUES (#{id,jdbcType=VARCHAR},#{projectName,jdbcType=VARCHAR},#{version,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR}," +
             "#{lastUpdateTime,jdbcType=TIMESTAMP},#{createTime,jdbcType=TIMESTAMP})" +
-            "ON DUPLICATE KEY UPDATE project_name = #{projectName},type = #{type},description = #{description},status = #{status},last_update_time = #{lastUpdateTime}")
+            "ON DUPLICATE KEY UPDATE project_name = #{projectName},type = #{type},description = #{description}," +
+            "version = #{version,jdbcType=VARCHAR}," +
+            "status = #{status},last_update_time = #{lastUpdateTime}")
     int save(Project project);
 
 
@@ -30,7 +30,7 @@ public interface ProjectDao {
             "delete from tb_project where id in" +
             "<foreach collection='ids' open='(' item='id' separator=',' close=')'> #{id}</foreach>" +
             "</script>")
-    void delProject(List<String> ids);
+    void delProject(@Param("ids") List<String> ids);
 
 
     @Select("SELECT id,project_name name,version,type,description,`status`,last_update_time LastUpdateTime,create_time createTime " +
@@ -45,4 +45,9 @@ public interface ProjectDao {
 
     @Select("")
     Integer memberCount(String project_id);
+
+
+    @Update("UPDATE tb_project SET project_name=#{projectName} AND version=#{version} AND type=#{type} AND " +
+            "description=#{description} AND STATUS=#{status} AND last_update_time=#{lastUpdateTime} WHERE id=#{id}")
+    void updateProject(Project project);
 }

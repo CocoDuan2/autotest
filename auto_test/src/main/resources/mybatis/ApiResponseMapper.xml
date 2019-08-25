@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xingxing.user.dao.APIResponseDao">
 
-    <insert id="save">
+    <!--<insert id="save">
         <foreach collection="responseList" item="response" open="INSERT INTO tb_interface_response" separator=";">
             <trim prefix="(" suffix=")" suffixOverrides=",">
 
@@ -52,5 +52,27 @@
                 </if>
             </trim>
         </foreach>
+    </insert>-->
+
+    <insert id="save">
+
+        insert into
+        tb_interface_response(id,name,`value`,interface_id,description,response_required,response_type)
+        VALUES
+        <foreach collection="responseList" item="request" separator=",">
+            (REPLACE(UUID(),"-",""),#{request.name}, #{request.value},
+            #{apiId},#{request.description},#{request.required},#{request._type})
+        </foreach>
     </insert>
+
+    
+    <delete id="deleteByInterfaceId" parameterType="java.lang.String">
+        DELETE FROM tb_interface_response
+        <where>
+            interface_id in
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
 </mapper>

@@ -12,8 +12,9 @@ public interface GroupDao {
     List<Map> findAll(@Param("project_id") String project_id);
 
 
-    @Insert("INSERT INTO tb_api_group (id,name,project_id) " +
-            "VALUES (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{project_id,jdbcType=VARCHAR})")
+    @Insert("INSERT INTO tb_api_group (id,name,project_id,group_type) " +
+            "VALUES (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}," +
+            "#{project_id,jdbcType=VARCHAR},#{group_type})")
     void addGroup(Group group);
 
 

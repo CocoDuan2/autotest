@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class ResponseDTO implements Serializable {
+    private String id;
     private String name;
     private String value;
     /**

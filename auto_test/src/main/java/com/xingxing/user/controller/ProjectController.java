@@ -28,7 +28,7 @@ public class ProjectController {
 
 
     /**
-     * 新增/更新/禁用项目 复用
+     * 新增
      *
      * @param project
      * @return
@@ -38,10 +38,30 @@ public class ProjectController {
 
         try {
             projectService.addProject(project);
-            return new Result(StatusCode.OK, "项目添加/更新成功", "");
+            return new Result(StatusCode.OK, "项目添加成功", "");
         } catch (Exception e) {
-            log.error("项目添加/更新失败", e);
-            return new Result(StatusCode.ERROR, "项目添加/更新失败", "");
+            log.error("项目添加失败", e);
+            return new Result(StatusCode.ERROR, "项目添加失败", "");
+
+        }
+    }
+
+
+    /**
+     * 更新/禁用项目 复用
+     * @param project
+     * @return
+     */
+    @RequestMapping(value = "/updateProject", method = RequestMethod.POST)
+    public Result updateProject(@RequestBody Project project) {
+
+        try {
+            projectService.updateProject(project);
+            return new Result(StatusCode.OK, "项目更新成功", "");
+        } catch (Exception e) {
+            log.error("项目更新失败", e);
+            return new Result(StatusCode.ERROR, "项目更新失败", "");
+
         }
     }
 
@@ -80,10 +100,10 @@ public class ProjectController {
      * @return
      */
     @RequestMapping(value = "/del_project", method = RequestMethod.POST)
-    public Result delProject(@RequestBody List<String> ids) {
+    public Result delProject(@RequestBody ProjectInfoDTO projectInfoDTO) {
 
         try {
-            projectService.delProject(ids);
+            projectService.delProject(projectInfoDTO.getIds());
             return new Result(StatusCode.OK, "项目删除成功", "");
         } catch (Exception e) {
             log.error("项目删除失败", e);
@@ -109,4 +129,5 @@ public class ProjectController {
             return new Result(StatusCode.ERROR, "项目详情查询失败", null);
         }
     }
+
 }

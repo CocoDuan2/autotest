@@ -1,20 +1,21 @@
 package com.xingxing.user.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.xingxing.user.dto.UserOperationLogDTO;
 import com.xingxing.user.pojo.User;
 import com.xingxing.user.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import util.IdWorker;
 
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.logging.SimpleFormatter;
 
 @Service
 public class UserService {
 
-    @Autowired(required = false)
+    @Autowired
     private UserDao userDao;
 
     @Autowired
@@ -38,12 +39,22 @@ public class UserService {
         return userDao.findById(userId);
     }
 
-    public PageInfo projectMember(String project_id, Integer page) {
-        List<Map<String, Object>> maps = userDao.selectProjectMember(project_id);
-        PageHelper.startPage(page,10);
-        PageInfo pageInfo = new PageInfo(maps);
+    /**
+     * 用户日志
+     *  @param httpServletRequest
+     * @param s
+     * @param project_id
+     * @param id
+     */
+    @Transactional
+    public void userLogs(String userId, String project_id, String operationId,String operationType) throws Exception {
 
-        return  pageInfo;
-
+        UserOperationLogDTO userOperationLogDTO = new UserOperationLogDTO();
+        userOperationLogDTO.setOperationId(operationId);
+        userOperationLogDTO.setProjectId(project_id);
+        userOperationLogDTO.setUserId(userId);
+        userOperationLogDTO.setOperationType(operationType);
+        userOperationLogDTO.setOperationTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis()));
+        userDao.insertUserLog(userOperationLogDTO);
     }
 }
