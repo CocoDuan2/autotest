@@ -42,7 +42,6 @@ public class ProjectController {
         } catch (Exception e) {
             log.error("项目添加/更新失败", e);
             return new Result(StatusCode.ERROR, "项目添加/更新失败", "");
-
         }
     }
 
@@ -110,5 +109,4 @@ public class ProjectController {
             return new Result(StatusCode.ERROR, "项目详情查询失败", null);
         }
     }
-
 }

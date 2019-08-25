@@ -8,12 +8,21 @@ import java.util.Date;
 @Data
 public class ProjectInfoDTO implements Serializable {
     private Date LastUpdateTime;
-    private Integer apiCount;//接口数量
+    /**
+     * 接口数量
+     */
+    private Integer apiCount;
     private Date createTime;
     private String description;
-    private Integer dynamicCount;//动态数量
+    /**
+     * 动态数量
+     */
+    private Integer dynamicCount;
     private String id;
-    private Integer memberCount;//成员数量
+    /**
+     * 成员数量
+     */
+    private Integer memberCount;
     private String name;
     private String status;
     private String type;

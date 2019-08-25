@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xingxing.user.dao.HostDao">
+
+    <update id="hostUpdate" parameterType="com.xingxing.user.pojo.Configuration">
+        UPDATE tb_configuration
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != '' and name != null">
+                name = #{name},
+            </if>
+            <if test="host != '' and host != null">
+                host = #{host},
+            </if>
+            <if test="port != '' and port != null">
+                port = #{port},
+            </if>
+            <if test="description != '' and description != null">
+                description = #{description},
+            </if>
+            <if test="state != '' and state != null">
+                state = #{state},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <insert id="insertHost" parameterType="com.xingxing.user.pojo.Configuration">
+        INSERT INTO tb_configuration
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            <if test="name != '' and name != null">
+                name,
+            </if>
+            <if test="host != '' and host != null">
+                host,
+            </if>
+            <if test="port != '' and port != null">
+                port,
+            </if>
+            <if test="description != '' and description != null">
+                description,
+            </if>
+            <if test="state != '' and state != null">
+                state,
+            </if>
+
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="name != '' and name != null">
+                #{name},
+            </if>
+            <if test="host != '' and host != null">
+                #{host},
+            </if>
+            <if test="port != '' and port != null">
+                #{port},
+            </if>
+            <if test="description != '' and description != null">
+                #{description},
+            </if>
+            <if test="state != '' and state != null">
+                #{state},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="hostTotal" parameterType="string" resultType="map">
+
+        select * from tb_configuration where
+        <if test="project_id !='' and project_id != null">
+            project_id =#{project_id}
+        </if>
+        <if test="name !='' and name != null">
+            and name =#{name}
+        </if>
+    </select>
+
+    <select id="selectById" parameterType="string" resultType="com.xingxing.user.pojo.Configuration">
+        SELECT * FROM tb_configuration where id =#{id}
+    </select>
+</mapper>
