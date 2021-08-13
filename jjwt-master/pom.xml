@@ -92,7 +92,7 @@
         <orgjson.version>20180130</orgjson.version>
 
         <!-- Optional Runtime Dependencies: -->
-        <bouncycastle.version>1.60</bouncycastle.version>
+        <bouncycastle.version>1.67</bouncycastle.version>
 
         <!-- Test Dependencies: Only required for testing when building.  Not required by users at runtime: -->
         <groovy.version>2.5.1</groovy.version>
